@@ -1,0 +1,122 @@
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Form Receipt</title>
+    <!-- Styling for the receipt -->
+    <style>
+      /* General styling for the body */
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        color: #333;
+        margin: 20px;
+      }
+
+      /* Styling for the main heading */
+      h1 {
+        text-align: center;
+        color: #4caf50;
+      }
+
+      /* Styling for tables */
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+
+      /* Styling for table headers and cells */
+      th,
+      td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+      }
+
+      /* Styling for table header */
+      th {
+        background-color: #4caf50;
+        color: white;
+      }
+
+      /* Styling for alternating row colors */
+      tr:nth-child(even) {
+        background-color: #f9f9f9;
+      }
+
+      /* Styling for secondary headings */
+      h2 {
+        color: #4caf50;
+      }
+
+      /* Styling for paragraphs */
+      p {
+        margin-top: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Main heading of the receipt -->
+    <h1>Contact Form Receipt</h1>
+    <% if (receiptData) { %>
+    <!-- Display customer information in a table -->
+    <table>
+      <tr>
+        <th>Field</th>
+        <th>Value</th>
+      </tr>
+      <tr>
+        <td><strong>Name:</strong></td>
+        <td><%= receiptData.name %></td>
+      </tr>
+      <tr>
+        <td><strong>Address:</strong></td>
+        <td><%= receiptData.address %></td>
+      </tr>
+      <tr>
+        <td><strong>City:</strong></td>
+        <td><%= receiptData.city %></td>
+      </tr>
+      <tr>
+        <td><strong>Province:</strong></td>
+        <td><%= receiptData.province %></td>
+      </tr>
+      <tr>
+        <td><strong>Phone:</strong></td>
+        <td><%= receiptData.phone %></td>
+      </tr>
+      <tr>
+        <td><strong>Email:</strong></td>
+        <td><%= receiptData.email %></td>
+      </tr>
+    </table>
+
+    <!-- Display products in a table -->
+    <h2>Products:</h2>
+    <% if (receiptData.products && receiptData.products.length > 0) { %>
+    <table>
+      <tr>
+        <th>Product</th>
+      </tr>
+      <% receiptData.products.forEach(product => { %>
+      <tr>
+        <td><%= product.name %></td>
+      </tr>
+      <% }); %>
+    </table>
+    <% } else { %>
+    <p>No products available.</p>
+    <% } %>
+
+    <!-- Display total price, sales tax, and total with tax -->
+    <p><strong>Total Price:</strong> $<%= receiptData.totalPrice %></p>
+    <p><strong>Sales Tax:</strong> <%= receiptData.salesTax %>%</p>
+    <p><strong>Total with Tax:</strong> $<%= receiptData.totalWithTax %></p>
+    <% } else { %>
+    <!-- Display a message if no receipt data is available -->
+    <p>No receipt data available.</p>
+    <% } %>
+  </body>
+</html>

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Online Store</title>
+    <style>
+      /* General styling for the body */
+      body {
+        font-family: Arial, sans-serif;
+        margin: 5px;
+        background-color: #f4f4f4;
+      }
+
+      /* Styling for the main heading */
+      h1 {
+        text-align: center;
+        color: #333;
+      }
+
+      /* Styling for the form */
+      form {
+        max-width: 400px;
+        margin: 0 auto;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Styling for labels */
+      label {
+        display: block;
+        margin-bottom: 8px;
+        color: #333;
+      }
+
+      /* Styling for input and select elements */
+      input,
+      select {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 16px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+      /* Styling for product display */
+      .product {
+        display: flex;
+        margin-bottom: 16px;
+      }
+
+      .product label {
+        flex: 1;
+        color: #333;
+      }
+
+      .product input {
+        flex: 1;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+
+      /* Styling for form fields */
+      .formfield {
+        margin-bottom: 16px;
+      }
+
+      /* Styling for the submit button */
+      button {
+        background-color: #4caf50;
+        color: white;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        width: 100%;
+      }
+
+      .error-messages {
+        display: block;
+        color: red;
+        margin-bottom: 8px;
+      }
+
+      /* Styling for the receipt section */
+      .receipt {
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Main heading -->
+    <h1>Welcome to the Samrit Store</h1>
+
+    <!-- Display errors if any -->
+    <% if (typeof errors !== 'undefined' && errors && errors.length > 0) { %>
+    <div class="error-messages">
+      <!-- Loop through errors and display messages -->
+      <% for (let error of errors) { %>
+      <p><%= error.msg %></p>
+      <% } %>
+    </div>
+    <% } %>
+
+    <!-- Main form section -->
+    <form method="post" action="/process">
+      
+      <label for="name">Name:</label>
+      <input type="text" name="name" id="name" />
+
+      <label for="address">Address:</label>
+      <input type="text" name="address" id="address" />
+
+      <label for="city">City:</label>
+      <input type="text" name="city" id="city" />
+
+      <label for="province">Select Province:</label>
+      <select name="province" id="province" onchange="calculateTaxRate">
+        <option value="" disabled selected>Select a province</option>
+        <option value="alberta">Alberta</option>
+        <option value="ontario">Ontario</option>
+        <option value="quebec">Quebec</option>
+      </select>
+
+      <!-- Product For Purchase -->
+      <div class="product">
+        <label for="product1"> Gopro ($720) </label>
+        <input type="number" name="product1" id="product1" />
+      </div>
+      <div class="product">
+        <label for="product2"> Macbook ($1548) </label>
+        <input type="number" name="product2" id="product2" />
+      </div>
+      <div class="product">
+        <label for="product3"> Apple Watch ($988) </label>
+        <input type="number" name="product3" id="product3" />
+      </div>
+      <div class="product">
+        <label for="product4"> Pen ($8) </label>
+        <input type="number" name="product4" id="product4" />
+      </div>
+
+      <div class="formfield">
+        <label for="phone">Phone Number:</label>
+        <input type="text" name="phone" id="phone" placeholder="5198201234" />
+      </div>
+      <div class="formfield">
+        <label for="email">Email:</label>
+        <input
+          type="text"
+          name="email"
+          id="email"
+          placeholder="test@test.com"
+        />
+        <button type="submit">Submit</button>
+      </div>
+    </form>
+  </body>
+</html>
